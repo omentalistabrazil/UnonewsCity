@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para votar em um jogador usando Google Apps Script
 function votar(jogador) {
-    fetch("https://script.google.com/macros/s/AKfycbyBckjZsqS6zhaRCx0CYvY4yqsDFCvOCOuatXuEm17THULF_OeiyMOi3LS87b6Qq3UeSg/exec", {
+    fetch(", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -89,7 +89,7 @@ function votar(jogador) {
     });
 }
 function carregarVotos() {
-    fetch("https://script.google.com/macros/s/AKfycbyBckjZsqS6zhaRCx0CYvY4yqsDFCvOCOuatXuEm17THULF_OeiyMOi3LS87b6Qq3UeSg/exec")
+    fetch("https://script.google.com/macros/s/AKfycbx9rI813mZV4Aba_0yDkSRKDsrGIFLtOM39dxTP5BF-FKfqUfJuqinmdx83rmqS2ZKTkg/exec")
     .then(response => response.json())
     .then(data => {
         if (data.success && data.estatisticas) {
@@ -101,7 +101,7 @@ function carregarVotos() {
 }
 carregarVotos();
 function atualizarVotos() {
-    fetch("https://script.google.com/macros/s/AKfycbyBckjZsqS6zhaRCx0CYvY4yqsDFCvOCOuatXuEm17THULF_OeiyMOi3LS87b6Qq3UeSg/exec")
+    fetch("https://script.google.com/macros/s/AKfycbx9rI813mZV4Aba_0yDkSRKDsrGIFLtOM39dxTP5BF-FKfqUfJuqinmdx83rmqS2ZKTkg/exec")
         .then(response => response.json())
         .then(data => {
             const linhas = document.querySelectorAll("tbody tr");
@@ -132,7 +132,7 @@ function votar(jogador) {
         }
     }
 
-    fetch("https://script.google.com/macros/s/AKfycbyBckjZsqS6zhaRCx0CYvY4yqsDFCvOCOuatXuEm17THULF_OeiyMOi3LS87b6Qq3UeSg/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbx9rI813mZV4Aba_0yDkSRKDsrGIFLtOM39dxTP5BF-FKfqUfJuqinmdx83rmqS2ZKTkg/exec", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
