@@ -1,210 +1,312 @@
-/* Fonte UNO */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600&display=swap');
 
-/* Estilo Geral */
 body {
-    font-family: 'Baloo 2', sans-serif; /* Fonte estilo UNO */
-    background-color: black;
-    color: white;
+    font-family: 'SF Pro Display', sans-serif;
+    background: linear-gradient(to bottom, #f2f2f7, #dcdce0);
+    color: #333;
+    text-align: center;
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
-/* Container Principal */
+/* Container principal */
 .container {
-    max-width: 900px;
-    margin: auto;
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
 }
 
-/* Cabeçalho */
-header {
-    background-color: black;
-    padding: 15px;
-    border-radius: 10px;
-    border: 5px solid white;
+/* Estilo do cabeçalho */
+header h1 {
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 10px;
 }
 
-h1 {
-    font-size: 3em;
-    color: #ff0000; /* Vermelho UNO */
-    text-transform: uppercase;
-    font-weight: bold;
-    text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.3);
-}
-
-/* Notícias */
+/* Estilo das notícias */
 .noticia {
-    background-color: black;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
     padding: 20px;
-    margin: 15px 0;
-    border-radius: 15px;
-    border: 5px solid white;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: fade-in 0.5s ease-in-out;
 }
-
-/* Bordas coloridas para cada notícia */
-.noticia:nth-child(1) { border-left: 10px solid #ff0000; } /* Vermelho */
-.noticia:nth-child(2) { border-left: 10px solid #0074cc; } /* Azul */
-.noticia:nth-child(3) { border-left: 10px solid #ffcc00; } /* Amarelo */
-.noticia:nth-child(4) { border-left: 10px solid #00aa00; } /* Verde */
-.noticia:nth-child(5) { border-left: 10px solid #ff0000; }
-.noticia:nth-child(6) { border-left: 10px solid #0074cc; }
-.noticia:nth-child(7) { border-left: 10px solid #ffcc00; }
 
 .noticia img {
     width: 100%;
-    max-width: 250px;
-    border-radius: 10px;
-    border: 3px solid white;
-}
-
-h2 {
-    font-size: 2em;
-    color: white;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-/* Botões */
-button {
-    background-color: white;
-    color: black;
-    border: 4px solid white;
-    padding: 2px 10px;
+    max-width: 400px;
     border-radius: 15px;
-    font-size: 1.1em;
-    font-weight: bold;
-    cursor: pointer;
     margin-top: 10px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-    background-color: #ff0000;
+.resumo {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.descricao {
+    display: none;
+    font-size: 0.95em;
+    color: #555;
+    text-align: left;
+}
+
+/* Botão de Ler Mais */
+button.ler-mais {
+    background: #007AFF;
     color: white;
-    border-color: #ffcc00;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 12px;
+    font-weight: 600;
+    font-family: 'SF Pro Display', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 122, 255, 0.3);
+    transition: all 0.3s;
 }
 
-/* Tabela de Estatísticas */
+button.ler-mais:hover {
+    background: #005ecb;
+    transform: scale(1.05);
+}
+
+/* Animação de fade-in */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilização da tabela */
 .tabela-container {
-    margin-top: 20px;
-    background-color: black;
-    border: 5px solid white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+    overflow-x: auto;
 }
 
 .tabela-container h2 {
-    color: #ffcc00; /* Amarelo UNO */
-    text-transform: uppercase;
-    font-size: 2em;
-    margin-bottom: 10px;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
+/* Tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: black;
-}
-
-th, td {
-    padding: 10px;
-    border: 2px solid white;
-    font-size: 0.8em;
-}
-
-th {
-    background-color: #ff0000; /* Vermelho UNO */
-    color: white;
-}
-/* Container do Detector de Trapaça */
-.detector-trapaca {
-    background: #1c1c1e;
+    background: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    padding: 10px;
-    width: 70%;
-    max-width: 320px; /* Reduzi ainda mais */
-    margin: 10px auto;
-    font-family: 'SF Pro Display', Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Cabeçalho da tabela */
+thead {
+    background-color: #2c3e50;
     color: white;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Título */
+thead th {
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Linhas da tabela */
+tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.2s ease-in-out;
+}
+
+/* Células */
+td {
+    padding: 12px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Células de acusações de trapaça */
+td:nth-child(3) {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    thead th {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .tabela-container h2 {
+        font-size: 20px;
+    }
+}
+
+/* Detector de Trapaça */
+.detector-trapaca {
+    margin: 40px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .detector-trapaca h2 {
-    font-size: 1em; /* Reduzido */
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: #fff;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
 }
 
-/* Lista de jogadores (Super compacto) */
+.detector-trapaca p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Estilização da votação */
+.votacao-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
 .jogador-votacao {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px;
-    margin: 4px 0;
-    border-radius: 8px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-size: 0.8em; /* Texto menor */
-    font-weight: 500;
-    transition: 0.2s;
-    width: 100%;
-    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    gap: 10px;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Cores Uno (Discretas) */
-.jogador-votacao:nth-child(1) { border-left-color: #ff3b30; } /* Vermelho */
-.jogador-votacao:nth-child(2) { border-left-color: #007aff; } /* Azul */
-.jogador-votacao:nth-child(3) { border-left-color: #ffcc00; } /* Amarelo */
-.jogador-votacao:nth-child(4) { border-left-color: #34c759; } /* Verde */
-
-/* Botão de voto */
 .jogador-votacao label {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 5px 8px; /* Ainda menor */
-    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.jogador-votacao input[type="radio"] {
+    margin-left: auto;
     cursor: pointer;
-    font-size: 0.8em; /* Texto reduzido */
-    font-weight: 500;
-    transition: 0.2s;
 }
 
-.jogador-votacao label:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Botão de confirmação */
-#confirmar-voto {
-    background: linear-gradient(135deg, #0a84ff, #007aff);
+/* Botão de votar */
+#votar-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 24px;
+    background: #2c3e50;
     color: white;
     border: none;
-    padding: 8px;
     border-radius: 8px;
-    font-size: 0.9em;
-    font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
-    width: 100%;
-    margin-top: 8px;
-    transition: 0.2s;
+    transition: background 0.3s, transform 0.2s;
 }
 
-#confirmar-voto:hover {
-    background: #005ecb;
+#votar-btn:hover {
+    background: #1a252f;
+    transform: scale(1.05);
 }
 
-/* Resultado */
+/* Mensagem de votação */
 #resultado-votacao {
-    margin-top: 8px;
-    font-size: 0.9em;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#votacao-mensagem {
+    font-size: 18px;
+    color: #e74c3c;
     font-weight: bold;
-    color: #8e8e93;
+}
+
+/* Botão de zerar */
+#zerar-btn {
+    display: block;
+    margin: 15px auto;
+    padding: 12px 24px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#zerar-btn:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+.slide-container {
+    position: relative;
+    max-width: 600px;
+    margin: 20px auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.noticia-slide {
+    min-width: 100%;
+    display: none;
+    text-align: center;
+}
+
+.noticia-slide.active {
+    display: block;
+}
+
+#prev-btn, #next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+#prev-btn {
+    left: 10px;
+}
+
+#next-btn {
+    right: 10px;
+}
+
+#prev-btn:hover, #next-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
 }
