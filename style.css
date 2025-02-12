@@ -1,0 +1,210 @@
+/* Fonte UNO */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+
+/* Estilo Geral */
+body {
+    font-family: 'Baloo 2', sans-serif; /* Fonte estilo UNO */
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Container Principal */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    background-color: black;
+    padding: 15px;
+    border-radius: 10px;
+    border: 5px solid white;
+}
+
+h1 {
+    font-size: 3em;
+    color: #ff0000; /* Vermelho UNO */
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Notícias */
+.noticia {
+    background-color: black;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 15px;
+    border: 5px solid white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Bordas coloridas para cada notícia */
+.noticia:nth-child(1) { border-left: 10px solid #ff0000; } /* Vermelho */
+.noticia:nth-child(2) { border-left: 10px solid #0074cc; } /* Azul */
+.noticia:nth-child(3) { border-left: 10px solid #ffcc00; } /* Amarelo */
+.noticia:nth-child(4) { border-left: 10px solid #00aa00; } /* Verde */
+.noticia:nth-child(5) { border-left: 10px solid #ff0000; }
+.noticia:nth-child(6) { border-left: 10px solid #0074cc; }
+.noticia:nth-child(7) { border-left: 10px solid #ffcc00; }
+
+.noticia img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    border: 3px solid white;
+}
+
+h2 {
+    font-size: 2em;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Botões */
+button {
+    background-color: white;
+    color: black;
+    border: 4px solid white;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #ff0000;
+    color: white;
+    border-color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Tabela de Estatísticas */
+.tabela-container {
+    margin-top: 20px;
+    background-color: black;
+    border: 5px solid white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.tabela-container h2 {
+    color: #ffcc00; /* Amarelo UNO */
+    text-transform: uppercase;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+}
+
+th, td {
+    padding: 10px;
+    border: 2px solid white;
+    font-size: 0.8em;
+}
+
+th {
+    background-color: #ff0000; /* Vermelho UNO */
+    color: white;
+}
+/* Container do Detector de Trapaça */
+.detector-trapaca {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 10px;
+    width: 70%;
+    max-width: 320px; /* Reduzi ainda mais */
+    margin: 10px auto;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Título */
+.detector-trapaca h2 {
+    font-size: 1em; /* Reduzido */
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Lista de jogadores (Super compacto) */
+.jogador-votacao {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    margin: 4px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8em; /* Texto menor */
+    font-weight: 500;
+    transition: 0.2s;
+    width: 100%;
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Cores Uno (Discretas) */
+.jogador-votacao:nth-child(1) { border-left-color: #ff3b30; } /* Vermelho */
+.jogador-votacao:nth-child(2) { border-left-color: #007aff; } /* Azul */
+.jogador-votacao:nth-child(3) { border-left-color: #ffcc00; } /* Amarelo */
+.jogador-votacao:nth-child(4) { border-left-color: #34c759; } /* Verde */
+
+/* Botão de voto */
+.jogador-votacao label {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 8px; /* Ainda menor */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em; /* Texto reduzido */
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.jogador-votacao label:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Botão de confirmação */
+#confirmar-voto {
+    background: linear-gradient(135deg, #0a84ff, #007aff);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    transition: 0.2s;
+}
+
+#confirmar-voto:hover {
+    background: #005ecb;
+}
+
+/* Resultado */
+#resultado-votacao {
+    margin-top: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #8e8e93;
+}
