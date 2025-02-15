@@ -223,27 +223,10 @@
             </button>
         </div>
 
-        <div id="news-container">
-            <!-- Categoria -->
-            <div class="news-category" id="news-category"></div>
+        <!-- Contêiner para todas as notícias -->
+        <div id="all-news-container"></div>
 
-            <!-- Imagem Principal -->
-            <img id="news-image" src="" alt="Imagem da Notícia">
-
-            <!-- Título -->
-            <h2 id="news-title"></h2>
-
-            <!-- Metadados (Autor e Data) -->
-            <div class="news-meta" id="news-meta"></div>
-
-            <!-- Conteúdo da Notícia -->
-            <p id="news-content"></p>
-        </div>
-
-        <!-- Botão de Próxima Notícia -->
-        <button id="next-news-button" onclick="nextNews()">Próxima Notícia</button>
-
-        <!-- Seção de Comentários -->
+        <!-- Seção de Comentários (única para todas as notícias) -->
         <div id="comments-section">
             <h3>Comentários:</h3>
             <ul id="comment-list"></ul>
@@ -256,26 +239,26 @@
     </div>
 
     <script type="module">
-       // Importar Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        // Importar Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// Configuração do Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyDt6eH--DYZIpb61UvScEXmQryH2BFs_8E",
-    authDomain: "classicasuni.firebaseapp.com",
-    databaseURL: "https://classicasuni-default-rtdb.firebaseio.com/",
-    projectId: "classicasuni",
-    storageBucket: "classicasuni.appspot.com",
-    messagingSenderId: "702021525849",
-    appId: "1:702021525849:web:d69f7c0943ea2468b4ac48"
-};
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDt6eH--DYZIpb61UvScEXmQryH2BFs_8E",
+            authDomain: "classicasuni.firebaseapp.com",
+            databaseURL: "https://classicasuni-default-rtdb.firebaseio.com/",
+            projectId: "classicasuni",
+            storageBucket: "classicasuni.appspot.com",
+            messagingSenderId: "702021525849",
+            appId: "1:702021525849:web:d69f7c0943ea2468b4ac48"
+        };
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
-// Array de notícias
+        // Array de notícias
         const news = [
             {
                 image: "imagens/gabriel.jpg",
@@ -329,162 +312,130 @@ const database = getDatabase(app);
 ];
 let currentNews = 0;
 
-// Função para carregar a próxima notícia
-window.nextNews = function () {
-    currentNews = (currentNews + 1) % news.length;
-    updateNews();
-};
 
-// Função para atualizar a notícia e os comentários
-function updateNews() {
-    const newsItem = news[currentNews];
-    if (newsItem) {
-        document.getElementById("news-image").src = newsItem.image;
-        document.getElementById("news-title").textContent = newsItem.title;
-        document.getElementById("news-content").textContent = newsItem.content;
+        // Função para carregar todas as notícias
+        function loadAllNews() {
+            const allNewsContainer = document.getElementById("all-news-container");
+            if (!allNewsContainer) return;
 
-        // Atualizar metadados
-        const meta = document.getElementById("news-meta");
-        meta.innerHTML = `<span>Por: ${newsItem.author}</span><span>Publicado em: ${newsItem.date}</span>`;
+            news.forEach((newsItem) => {
+                const newsDiv = document.createElement("div");
+                newsDiv.className = "news-item";
 
-        // Atualizar categoria
-        const category = document.getElementById("news-category");
-        category.textContent = newsItem.category;
-
-        // Carregar comentários
-        loadComments(currentNews);
-    } else {
-        console.error("Notícia não encontrada no índice:", currentNews);
-    }
-}
-
-// Função para adicionar comentários
-function addComment(newsId, name, comment) {
-    const commentRef = ref(database, 'comments/' + newsId);
-    push(commentRef, {
-        name: name,
-        text: comment,
-        timestamp: new Date().toISOString()
-    });
-}
-
-// Função para adicionar respostas
-function addReply(newsId, commentId, name, reply) {
-    const replyRef = ref(database, `comments/${newsId}/${commentId}/replies`);
-    push(replyRef, {
-        name: name,
-        text: reply,
-        timestamp: new Date().toISOString()
-    });
-}
-
-// Função para carregar comentários
-function loadComments(newsId) {
-    const commentRef = ref(database, 'comments/' + newsId);
-    const commentList = document.getElementById("comment-list");
-    if (!commentList) {
-        console.error("Elemento 'comment-list' não encontrado.");
-        return;
-    }
-
-    // Limpar a lista de comentários antes de carregar novos
-    commentList.innerHTML = '';
-
-    // Usar o evento 'onValue' para carregar os comentários
-    onValue(commentRef, (snapshot) => {
-        const comments = snapshot.val();
-        if (comments) {
-            // Limpar a lista de comentários antes de adicionar novos
-            commentList.innerHTML = '';
-
-            Object.keys(comments).forEach((key) => {
-                const comment = comments[key];
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <strong>${comment.name}:</strong> ${comment.text}
-                    <button class="reply-button" onclick="showReplyForm('${newsId}', '${key}')">Responder</button>
-                    <div class="reply-section" id="reply-section-${key}" style="display: none;">
-                        <input type="text" id="reply-name-${key}" placeholder="Seu nome..." required>
-                        <input type="text" id="reply-text-${key}" placeholder="Digite sua resposta..." required>
-                        <button onclick="submitReply('${newsId}', '${key}')">Enviar Resposta</button>
+                newsDiv.innerHTML = `
+                    <div class="news-category">${newsItem.category}</div>
+                    <img src="${newsItem.image}" alt="Imagem da Notícia">
+                    <h2>${newsItem.title}</h2>
+                    <div class="news-meta">
+                        <span>Por: ${newsItem.author}</span>
+                        <span>Publicado em: ${newsItem.date}</span>
                     </div>
-                    <ul class="replies" id="replies-${key}"></ul>
+                    <p>${newsItem.content}</p>
                 `;
-                commentList.appendChild(li);
 
-                // Carregar respostas
-                loadReplies(newsId, key);
+                allNewsContainer.appendChild(newsDiv);
             });
         }
-    }, (error) => {
-        console.error("Erro ao carregar comentários:", error);
-    });
-}
 
-// Função para carregar respostas
-function loadReplies(newsId, commentId) {
-    const replyRef = ref(database, `comments/${newsId}/${commentId}/replies`);
-    const replyList = document.getElementById(`replies-${commentId}`);
-    if (!replyList) return;
-
-    onValue(replyRef, (snapshot) => {
-        const replies = snapshot.val();
-        if (replies) {
-            replyList.innerHTML = '';
-            Object.keys(replies).forEach((key) => {
-                const reply = replies[key];
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${reply.name}:</strong> ${reply.text}`;
-                replyList.appendChild(li);
+        // Função para adicionar comentários
+        function addComment(name, comment) {
+            const commentRef = ref(database, 'comments/');
+            push(commentRef, {
+                name: name,
+                text: comment,
+                timestamp: new Date().toISOString()
             });
         }
-    });
-}
 
-// Função para exibir o formulário de resposta
-window.showReplyForm = function (newsId, commentId) {
-    const replySection = document.getElementById(`reply-section-${commentId}`);
-    replySection.style.display = 'block';
-};
+        // Função para carregar comentários
+        function loadComments() {
+            const commentRef = ref(database, 'comments/');
+            const commentList = document.getElementById("comment-list");
+            if (!commentList) return;
 
-// Função para enviar uma resposta
-window.submitReply = function (newsId, commentId) {
-    const nameInput = document.getElementById(`reply-name-${commentId}`);
-    const replyInput = document.getElementById(`reply-text-${commentId}`);
-    if (nameInput && replyInput && nameInput.value.trim() && replyInput.value.trim()) {
-        addReply(newsId, commentId, nameInput.value.trim(), replyInput.value.trim());
-        nameInput.value = '';
-        replyInput.value = '';
-    }
-};
+            onValue(commentRef, (snapshot) => {
+                const comments = snapshot.val();
+                if (comments) {
+                    commentList.innerHTML = ''; // Limpa a lista de comentários
+                    Object.keys(comments).forEach((key) => {
+                        const comment = comments[key];
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <strong>${comment.name}:</strong> ${comment.text}
+                            <button class="reply-button" onclick="showReplyForm('${key}')">Responder</button>
+                            <div class="reply-section" id="reply-section-${key}" style="display: none;">
+                                <input type="text" id="reply-name-${key}" placeholder="Seu nome..." required>
+                                <input type="text" id="reply-text-${key}" placeholder="Digite sua resposta..." required>
+                                <button onclick="submitReply('${key}')">Enviar Resposta</button>
+                            </div>
+                            <ul class="replies" id="replies-${key}"></ul>
+                        `;
+                        commentList.appendChild(li);
 
-// Função para compartilhar no WhatsApp
-window.shareOnWhatsApp = function () {
-    const newsItem = news[currentNews];
-    const message = `Confira essa notícia: "${newsItem.title}" - ${window.location.href}`;
-    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-};
+                        // Carregar respostas
+                        loadReplies(key);
+                    });
+                }
+            });
+        }
 
-// Função para compartilhar no Instagram
-window.shareOnInstagram = function () {
-    window.open('https://www.instagram.com/', '_blank');
-};
+        // Função para carregar respostas
+        function loadReplies(commentId) {
+            const replyRef = ref(database, `comments/${commentId}/replies`);
+            const replyList = document.getElementById(`replies-${commentId}`);
+            if (!replyList) return;
 
-// Evento de envio do formulário de comentários
-document.getElementById("comment-form").addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nameInput = document.getElementById("name-input");
-    const commentInput = document.getElementById("comment-input");
-    if (nameInput && commentInput && nameInput.value.trim() && commentInput.value.trim()) {
-        addComment(currentNews, nameInput.value.trim(), commentInput.value.trim());
-        nameInput.value = '';
-        commentInput.value = '';
-    }
-});
+            onValue(replyRef, (snapshot) => {
+                const replies = snapshot.val();
+                if (replies) {
+                    replyList.innerHTML = '';
+                    Object.keys(replies).forEach((key) => {
+                        const reply = replies[key];
+                        const li = document.createElement('li');
+                        li.innerHTML = `<strong>${reply.name}:</strong> ${reply.text}`;
+                        replyList.appendChild(li);
+                    });
+                }
+            });
+        }
 
-// Carregar a primeira notícia ao abrir a página
-updateNews();
+        // Função para exibir o formulário de resposta
+        window.showReplyForm = function (commentId) {
+            const replySection = document.getElementById(`reply-section-${commentId}`);
+            replySection.style.display = 'block';
+        };
+
+        // Função para enviar uma resposta
+        window.submitReply = function (commentId) {
+            const nameInput = document.getElementById(`reply-name-${commentId}`);
+            const replyInput = document.getElementById(`reply-text-${commentId}`);
+            if (nameInput && replyInput && nameInput.value.trim() && replyInput.value.trim()) {
+                const replyRef = ref(database, `comments/${commentId}/replies`);
+                push(replyRef, {
+                    name: nameInput.value.trim(),
+                    text: replyInput.value.trim(),
+                    timestamp: new Date().toISOString()
+                });
+                nameInput.value = '';
+                replyInput.value = '';
+            }
+        };
+
+        // Evento de envio do formulário de comentários
+        document.getElementById("comment-form").addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById("name-input");
+            const commentInput = document.getElementById("comment-input");
+            if (nameInput && commentInput && nameInput.value.trim() && commentInput.value.trim()) {
+                addComment(nameInput.value.trim(), commentInput.value.trim());
+                nameInput.value = '';
+                commentInput.value = '';
+            }
+        });
+
+        // Carregar todas as notícias e comentários ao abrir a página
+        loadAllNews();
+        loadComments();
     </script>
 </body>
-            </html>
+    </html>
