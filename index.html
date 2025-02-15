@@ -3,149 +3,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNO News</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Notícias do Uno - Expondo a Trapaça!</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #c00;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .news-meta {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .news-meta span {
+            margin-right: 10px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background-color: #c00;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para os botões de compartilhamento */
+        .share-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .share-buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #555;
+        }
+
+        .share-buttons button:hover {
+            color: #333;
+        }
+
+        /* Estilo do botão "Próxima Notícia" */
+        button#next-news-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #c00; /* Vermelho */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button#next-news-button:hover {
+            background-color: #900; /* Vermelho mais escuro ao passar o mouse */
+        }
+
+        /* Estilo do botão "Responder" */
+        button.reply-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #007bff; /* Azul */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.reply-button:hover {
+            background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+        }
+
+        /* Estilos para os comentários */
+        #comments-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #comment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #comment-list li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #comment-list li strong {
+            color: #c00;
+        }
+
+        .reply-section {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .reply-section input {
+            padding: 5px;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .reply-section button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reply-section button:hover {
+            background-color: #0056b3;
+        }
+
+        .replies {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .replies li {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        #comment-form {
+            margin-top: 20px;
+        }
+
+        #comment-form input {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #comment-form button {
+            padding: 10px 15px;
+            background-color: #c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #comment-form button:hover {
+            background-color: #900;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            
-            <h1>UNO NEWS</h1>
-            <p>Aqui estão todas as matérias atualizadas sobre os participantes do Uno!</p>
-        </header>
+        <h1>Notícias do Uno - Expondo a Trapaça!</h1>
 
-        <div id="noticia-container">
-            <!-- Eliara -->
-            <div class="noticia">
-                <h2>Eliara - "A Rainha do +4"</h2>
-                <img src="imagens/eliara.jpg" alt="Eliara jogando Uno">
-                <p class="resumo">"Eliara acumula +4 na mão e surpreende adversários com ataques inesperados. 'Ela joga sorrindo e depois destrói sua alma', diz vítima."</p>
-                <p class="descricao">
-                    Em mais um campeonato de Uno, Eliara mostrou sua frieza ao segurar vários +4 na mão por rodadas inteiras. Quando todos pensavam que estavam seguros, ela jogou um atrás do outro, eliminando qualquer chance de vitória dos adversários. "Eu confiei nela, e olha o que aconteceu", lamenta Edyelsom. Testemunhas relatam que ninguém nunca viu ela comprando cartas. Mistério ou trapaça?
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Edyelsom -->
-            <div class="noticia">
-                <h2>Edyelsom - "O Rei da Regra Inventada"</h2>
-                <img src="imagens/edyelsom.jpg" alt="Edyelsom jogando Uno">
-                <p class="resumo">"Jogador insiste que pode jogar duas cartas ao mesmo tempo e quase convence grupo. 'Eu vi essa regra na internet', diz ele."</p>
-                <p class="descricao">
-                    Edyelsom é conhecido por sempre encontrar "novas regras" do Uno, que curiosamente sempre o favorecem. Durante a última partida, tentou argumentar que era possível jogar duas cartas ao mesmo tempo para se livrar mais rápido do baralho. "Isso é uma técnica avançada, aprendi num torneio internacional", afirmou. O grupo decidiu seguir as regras oficiais, mas ainda suspeita que ele tenha um manual secreto de trapaças.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Thays -->
-            <div class="noticia">
-                <h2>Thays - "A Jogadora Mais Ruim do Uno"</h2>
-                <img src="imagens/thays.jpg" alt="Thays jogando Uno">
-                <p class="resumo">"Nunca venceu uma partida, mas sempre acredita que a próxima será diferente. 'Eu só tive azar... de novo', diz após perder pela 15ª vez seguida."</p>
-                <p class="descricao">
-                    Thays tem um histórico impressionante no Uno: 0 vitórias e incontáveis derrotas. Mesmo tentando seguir estratégias diferentes, ela sempre acaba comprando mais cartas do que jogando. "Eu juro que dessa vez eu vou ganhar", disse antes de ser forçada a comprar +16 em uma única rodada. Seus amigos já sugeriram que ela tente outro jogo, mas ela insiste que a sorte dela vai mudar... um dia.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Edvania -->
-            <div class="noticia">
-                <h2>Edvania - "A Mestre da Distração"</h2>
-                <img src="imagens/edvania.jpg" alt="Edvania jogando Uno">
-                <p class="resumo">"Edvania distrai jogadores com conversas aleatórias e joga cartas escondidas. 'A gente perde o foco e quando vê, ela já ganhou', afirma amigo."</p>
-                <p class="descricao">
-                    Edvania desenvolveu uma tática única no Uno: distrair os adversários com histórias sem fim. Enquanto os amigos tentam entender como um simples jogo virou um podcast ao vivo, ela rapidamente joga cartas sem que ninguém perceba. "Eu só estava contando sobre meu dia, e quando vi, ganhei", defende-se. Os amigos estão considerando usar fones de ouvido para impedir suas distrações na próxima partida.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Suellen -->
-            <div class="noticia">
-                <h2>Suellen - "A Rainha da Vingança"</h2>
-                <img src="imagens/suellen.jpg" alt="Suellen jogando Uno">
-                <p class="resumo">"Perdeu uma partida para Suellen? Cuidado. Próxima rodada pode ser sua última. 'Eu nunca esqueço quem me fez comprar cartas', avisa ela."</p>
-                <p class="descricao">
-                    Jogar contra Suellen no Uno pode parecer tranquilo até o momento em que você a faz comprar cartas. A partir desse instante, sua única missão na vida é destruir o responsável. Durante a última partida, um amigo a fez comprar +2 e, minutos depois, ela o puniu com uma sequência de +4, +2 e inversão, acabando com suas esperanças de vitória. "Eu não jogo para vencer, eu jogo para me vingar", declarou com um sorriso misterioso.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Gabriel -->
-            <div class="noticia">
-                <h2>Gabriel - "O Gênio (ou Trapaceiro?) do Uno"</h2>
-                <img src="imagens/gabriel.jpg" alt="Gabriel jogando Uno">
-                <p class="resumo">"Sempre vence, mas ninguém sabe como. 'Ele tem uma estratégia secreta, ou um baralho modificado', dizem os amigos."</p>
-                <p class="descricao">
-                    Gabriel tem um histórico impressionante no Uno: vence 95% das partidas e sempre parece saber exatamente o que jogar. No entanto, seus amigos começaram a suspeitar que algo não está certo. "Ele nunca compra cartas! Como isso é possível?", questiona Edvania. Algumas teorias sugerem que ele esconde cartas no bolso, enquanto outras apontam que ele simplesmente lê a mente dos adversários. "Eu apenas jogo melhor que vocês", diz Gabriel, mas o mistério continua.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
-
-            <!-- Felipe -->
-            <div class="noticia">
-                <h2>Felipe - "O Confuseiro do Uno"</h2>
-                <img src="imagens/felipe.jpg" alt="Felipe jogando Uno">
-                <p class="resumo">"Sempre envolvido nas maiores confusões do jogo. 'Eu ganhei ou perdi?', pergunta após cada partida."</p>
-                <p class="descricao">
-                    Felipe, mais conhecido como Carne e Mortadela, não joga Uno... ele causa o caos no Uno. Sempre brigando com Suellen e Eliara, ele passa mais tempo discutindo regras do que jogando. "Isso não pode!", grita, mesmo sem saber ao certo o que está errado. Seu nível de confusão é tão grande que, mesmo quando ganha, ele ainda pergunta: "Mas eu ganhei mesmo?".
-                    Recentemente, ele revelou que veio da China e aprendeu português só para jogar Uno com os amigos. No entanto, ninguém tem certeza se ele realmente entende o jogo ou só está ali para criar polêmica. Durante uma das partidas, tentou jogar três cartas ao mesmo tempo e argumentou: "Lá na China é assim!". Até hoje ninguém sabe se isso é verdade ou só mais uma das suas invenções.
-                </p>
-                <button class="ler-mais">Ler Mais</button>
-            </div>
+        <!-- Botões de Compartilhamento -->
+        <div class="share-buttons">
+            <button onclick="shareOnWhatsApp()" title="Compartilhar no WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+            <button onclick="shareOnInstagram()" title="Compartilhar no Instagram">
+                <i class="fab fa-instagram"></i>
+            </button>
         </div>
 
-        <!-- Tabela de Estatísticas -->
-        <div class="tabela-container">
-            <h2>Estatísticas dos Jogadores</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Jogador</th>
-                        <th>Derrotas</th>
-                        <th>Acusações de Trapaça</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Eliara</td>
-                        <td>3</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>Edyelsom</td>
-                        <td>10</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Thays</td>
-                        <td>25</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Edvania</td>
-                        <td>5</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Suellen</td>
-                        <td>8</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Gabriel</td>
-                        <td>1</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>Felipe</td>
-                        <td>12</td>
-                        <td>5</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div id="news-container">
+            <!-- Categoria -->
+            <div class="news-category" id="news-category"></div>
+
+            <!-- Imagem Principal -->
+            <img id="news-image" src="" alt="Imagem da Notícia">
+
+            <!-- Título -->
+            <h2 id="news-title"></h2>
+
+            <!-- Metadados (Autor e Data) -->
+            <div class="news-meta" id="news-meta"></div>
+
+            <!-- Conteúdo da Notícia -->
+            <p id="news-content"></p>
+        </div>
+
+        <!-- Botão de Próxima Notícia -->
+        <button id="next-news-button" onclick="nextNews()">Próxima Notícia</button>
+
+        <!-- Seção de Comentários -->
+        <div id="comments-section">
+            <h3>Comentários:</h3>
+            <ul id="comment-list"></ul>
+            <form id="comment-form">
+                <input type="text" id="name-input" placeholder="Seu nome..." required>
+                <input type="text" id="comment-input" placeholder="Deixe um comentário..." required>
+                <button type="submit">Comentar</button>
+            </form>
         </div>
     </div>
-</div>
-    <script src="script.js"></script>
+
+    <script type="module">
+       // Importar Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+// Configuração do Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDt6eH--DYZIpb61UvScEXmQryH2BFs_8E",
+    authDomain: "classicasuni.firebaseapp.com",
+    databaseURL: "https://classicasuni-default-rtdb.firebaseio.com/",
+    projectId: "classicasuni",
+    storageBucket: "classicasuni.appspot.com",
+    messagingSenderId: "702021525849",
+    appId: "1:702021525849:web:d69f7c0943ea2468b4ac48"
+};
+
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Array de notícias
+        const news = [
+            {
+                image: "imagens/gabriel.jpg",
+                title: "Gabriel é o Mestre do Uno!",
+                content: "Em mais uma partida épica de Uno, Gabriel provou mais uma vez por que é o melhor jogador da turma. Enquanto todos tentavam desesperadamente vencer, Gabriel jogava com uma calma e estratégia que deixavam todos boquiabertos. Suellen até tentou distraí-lo com conversas aleatórias, mas nada funcionou. No final, Gabriel venceu com uma jogada magistral, deixando todos com inveja de sua habilidade. Será que alguém conseguirá derrotá-lo algum dia?",
+                author: "Edvania",
+                date: "15/02/2025",
+                category: "Vitórias"
+            },
+            {
+                image: "imagens/suellen.jpg",
+                title: "Suellen tenta ser melhor que Gabriel!",
+                content: "Suellen, cansada de sempre perder para Gabriel, decidiu treinar intensamente para a próxima partida de Uno. Ela passou noites estudando estratégias e até assistiu tutoriais no YouTube. No dia da partida, ela chegou confiante, mas Gabriel, com sua habilidade lendária, venceu novamente. Suellen, frustrada, disse: 'Um dia eu vou te vencer, Gabriel!'. Todos riram, mas no fundo sabem que Gabriel é imbatível.",
+                author: "Edvania",
+                date: "14/02/2025",
+                category: "Desafios"
+            },
+            {
+          
+        image: "imagens/thays.jpg",
+        title: "Thays bate recorde: 3 anos sem ganhar no Uno e ainda acredita na virada",
+        content: "A história de superação (ou seria de azar?) continua! Thays completou 3 anos seguidos sem vencer uma única partida de Uno, consolidando seu legado como a jogadora mais derrotada da história. Fontes próximas relatam que ela já perdeu de todas as formas possíveis: esquecendo de dizer 'UNO!', comprando +4 seguidos, caindo em regras falsas inventadas por Eliara e até sendo eliminada antes mesmo de jogar. 'Eu juro que dessa vez eu ganho!', disse ela antes de comprar 12 cartas de uma só vez. Diante da situação, os amigos pensam em deixar Thays vencer de propósito, mas temem que ela perca mesmo assim. Especialistas dizem que, se ela mantiver esse ritmo, pode entrar para o Guinness Book como a única pessoa a perder no Uno até sem adversários.",
+        author: "Gabriel",
+        date: "14/02/2025",
+        category: "derrota"
+            },
+            {
+                image: "imagens/edyelsom.jpg",
+                title: "Edyelsom é flagrado roubando cartas!",
+                content: "Em mais um escândalo no Uno, Edyelsom foi flagrado tentando roubar cartas do monte. Ele jurou que foi um acidente, mas todos sabem que ele estava desesperado para vencer Gabriel. 'Eu só queria uma chance!', disse Edyelsom, enquanto Gabriel ria da situação. No final, Edyelsom foi desclassificado e Gabriel venceu mais uma partida.",
+                author: "Edvania",
+                date: "12/02/2025",
+                category: "Trapaças"
+            },
+            {
+                image: "imagens/eliara.jpg",
+                title: "Eliara tenta enganar no Uno com onça no quintal, mas Gabriel desmascara o golpe",
+                content:"Em mais uma tentativa desesperada de escapar da derrota no Uno, Eliara gritou:Olha uma onça no quintal da vizinha, Como esperado todos se viraram assustados, mas quando voltaram, Eliara já tinha misteriosamente menos cartas na mão.O plano parecia perfeito,mas ela esqueceu um detalhe: Gabriel, o mais esperto do grupo, não caiu no truque. Ele ficou de olho e pegou Eliara no flagra enfiando cartas debaixo da perna.Desmascarada, ela tentou se justificar: Mas eu juro que vi!, enquanto o resto do grupo ria. A única onça que apareceu naquela noite foi a de Eliara tentando dar o golpe!",
+                author: "Gabriel",
+                date: "11/02/2025",
+                category: "Diversão"
+            },
+            {
+               image: "imagens/edvania.jpg",
+               title: "Edvânia perde no Uno e ameaça criar figurinha humilhante de Gabriel",
+               content: "Após uma derrota vergonhosa no Uno, Edvânia não aceitou a derrota com dignidade. Em vez de admitir que jogou mal, ela partiu para a vingança digital e declarou: 'Vou fazer uma figurinha do Gabriel que ele nunca vai esquecer!'. Gabriel, que já tem experiência com essas ameaças, tentou ignorar, mas os outros jogadores sabiam o que isso significava: um meme histórico estava a caminho. Segundo fontes próximas, Edvânia já estava procurando a pior foto possível do rival e afiando sua criatividade para o deboche. Agora, Gabriel vive na tensão, sem saber quando e como essa figurinha será lançada, mas uma coisa é certa: a guerra do Uno agora se expandiu para o WhatsApp!",
+               author: "Edvânia",
+               date: "10/02/2025",
+               category: "Diversão"
+    }
+];
+let currentNews = 0;
+
+// Função para carregar a próxima notícia
+window.nextNews = function () {
+    currentNews = (currentNews + 1) % news.length;
+    updateNews();
+};
+
+// Função para atualizar a notícia e os comentários
+function updateNews() {
+    const newsItem = news[currentNews];
+    if (newsItem) {
+        document.getElementById("news-image").src = newsItem.image;
+        document.getElementById("news-title").textContent = newsItem.title;
+        document.getElementById("news-content").textContent = newsItem.content;
+
+        // Atualizar metadados
+        const meta = document.getElementById("news-meta");
+        meta.innerHTML = `<span>Por: ${newsItem.author}</span><span>Publicado em: ${newsItem.date}</span>`;
+
+        // Atualizar categoria
+        const category = document.getElementById("news-category");
+        category.textContent = newsItem.category;
+
+        // Carregar comentários
+        loadComments(currentNews);
+    } else {
+        console.error("Notícia não encontrada no índice:", currentNews);
+    }
+}
+
+// Função para adicionar comentários
+function addComment(newsId, name, comment) {
+    const commentRef = ref(database, 'comments/' + newsId);
+    push(commentRef, {
+        name: name,
+        text: comment,
+        timestamp: new Date().toISOString()
+    });
+}
+
+// Função para adicionar respostas
+function addReply(newsId, commentId, name, reply) {
+    const replyRef = ref(database, `comments/${newsId}/${commentId}/replies`);
+    push(replyRef, {
+        name: name,
+        text: reply,
+        timestamp: new Date().toISOString()
+    });
+}
+
+// Função para carregar comentários
+function loadComments(newsId) {
+    const commentRef = ref(database, 'comments/' + newsId);
+    const commentList = document.getElementById("comment-list");
+    if (!commentList) {
+        console.error("Elemento 'comment-list' não encontrado.");
+        return;
+    }
+
+    // Limpar a lista de comentários antes de carregar novos
+    commentList.innerHTML = '';
+
+    // Usar o evento 'onValue' para carregar os comentários
+    onValue(commentRef, (snapshot) => {
+        const comments = snapshot.val();
+        if (comments) {
+            // Limpar a lista de comentários antes de adicionar novos
+            commentList.innerHTML = '';
+
+            Object.keys(comments).forEach((key) => {
+                const comment = comments[key];
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${comment.name}:</strong> ${comment.text}
+                    <button class="reply-button" onclick="showReplyForm('${newsId}', '${key}')">Responder</button>
+                    <div class="reply-section" id="reply-section-${key}" style="display: none;">
+                        <input type="text" id="reply-name-${key}" placeholder="Seu nome..." required>
+                        <input type="text" id="reply-text-${key}" placeholder="Digite sua resposta..." required>
+                        <button onclick="submitReply('${newsId}', '${key}')">Enviar Resposta</button>
+                    </div>
+                    <ul class="replies" id="replies-${key}"></ul>
+                `;
+                commentList.appendChild(li);
+
+                // Carregar respostas
+                loadReplies(newsId, key);
+            });
+        }
+    }, (error) => {
+        console.error("Erro ao carregar comentários:", error);
+    });
+}
+
+// Função para carregar respostas
+function loadReplies(newsId, commentId) {
+    const replyRef = ref(database, `comments/${newsId}/${commentId}/replies`);
+    const replyList = document.getElementById(`replies-${commentId}`);
+    if (!replyList) return;
+
+    onValue(replyRef, (snapshot) => {
+        const replies = snapshot.val();
+        if (replies) {
+            replyList.innerHTML = '';
+            Object.keys(replies).forEach((key) => {
+                const reply = replies[key];
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${reply.name}:</strong> ${reply.text}`;
+                replyList.appendChild(li);
+            });
+        }
+    });
+}
+
+// Função para exibir o formulário de resposta
+window.showReplyForm = function (newsId, commentId) {
+    const replySection = document.getElementById(`reply-section-${commentId}`);
+    replySection.style.display = 'block';
+};
+
+// Função para enviar uma resposta
+window.submitReply = function (newsId, commentId) {
+    const nameInput = document.getElementById(`reply-name-${commentId}`);
+    const replyInput = document.getElementById(`reply-text-${commentId}`);
+    if (nameInput && replyInput && nameInput.value.trim() && replyInput.value.trim()) {
+        addReply(newsId, commentId, nameInput.value.trim(), replyInput.value.trim());
+        nameInput.value = '';
+        replyInput.value = '';
+    }
+};
+
+// Função para compartilhar no WhatsApp
+window.shareOnWhatsApp = function () {
+    const newsItem = news[currentNews];
+    const message = `Confira essa notícia: "${newsItem.title}" - ${window.location.href}`;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+};
+
+// Função para compartilhar no Instagram
+window.shareOnInstagram = function () {
+    window.open('https://www.instagram.com/', '_blank');
+};
+
+// Evento de envio do formulário de comentários
+document.getElementById("comment-form").addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById("name-input");
+    const commentInput = document.getElementById("comment-input");
+    if (nameInput && commentInput && nameInput.value.trim() && commentInput.value.trim()) {
+        addComment(currentNews, nameInput.value.trim(), commentInput.value.trim());
+        nameInput.value = '';
+        commentInput.value = '';
+    }
+});
+
+// Carregar a primeira notícia ao abrir a página
+updateNews();
+    </script>
 </body>
-</html>
+            </html>
